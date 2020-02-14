@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:42:56 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/12 16:50:30 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/14 15:44:33 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_stack			*add_element(t_stack *stack, t_element *element)
 		if (!stack->elements)
 		{
 			stack->elements = element;
+			element->next = element;
+			element->prev = element;
 		}
 		else
 		{

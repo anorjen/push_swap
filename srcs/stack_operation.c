@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 16:40:35 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/12 16:41:05 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/14 17:07:32 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void			push_element(t_stack *from, t_stack *to)
 		from->elements = element->next;
 		from->elements->prev = element->prev;
 		from->size--;
-
 		to = add_element(to, element);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/12 18:16:16 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/14 17:45:58 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,39 +37,47 @@ typedef struct		s_operation
 }					t_operation;
 
 /*
+** arguments.c
+*/
+void				free_list(t_list *lst_operations);
+void				finish(t_list *lst_operations, t_stack *stack_a, t_stack *stack_b);
+int					check_number(char *str, int *number);
+int					fill_stack(t_stack **stack, int ac, char **av);
+
+/*
 ** ps_operation.c
 */
 
-void	sa(t_stack *stack_a, t_stack *stack_b);
-void	pa(t_stack *stack_a, t_stack *stack_b);
-void	ra(t_stack *stack_a, t_stack *stack_b);
-void	rra(t_stack *stack_a, t_stack *stack_b);
+void				sa(t_stack *stack_a, t_stack *stack_b);
+void				pa(t_stack *stack_a, t_stack *stack_b);
+void				ra(t_stack *stack_a, t_stack *stack_b);
+void				rra(t_stack *stack_a, t_stack *stack_b);
 
-void	sb(t_stack *stack_a, t_stack *stack_b);
-void	pb(t_stack *stack_a, t_stack *stack_b);
-void	rb(t_stack *stack_a, t_stack *stack_b);
-void	rrb(t_stack *stack_a, t_stack *stack_b);
+void				sb(t_stack *stack_a, t_stack *stack_b);
+void				pb(t_stack *stack_a, t_stack *stack_b);
+void				rb(t_stack *stack_a, t_stack *stack_b);
+void				rrb(t_stack *stack_a, t_stack *stack_b);
 
-void	ss(t_stack *stack_a, t_stack *stack_b);
-void	rr(t_stack *stack_a, t_stack *stack_b);
-void	rrr(t_stack *stack_a, t_stack *stack_b);
+void				ss(t_stack *stack_a, t_stack *stack_b);
+void				rr(t_stack *stack_a, t_stack *stack_b);
+void				rrr(t_stack *stack_a, t_stack *stack_b);
 
 /*
 ** stack.c
 */
 
-t_element		*new_element(int value);
-t_stack			*add_element(t_stack *stack, t_element *element);
-void			free_stack(t_stack *stack);
+t_element			*new_element(int value);
+t_stack				*add_element(t_stack *stack, t_element *element);
+void				free_stack(t_stack *stack);
 
 /*
 ** stack_operation.c
 */
 
-void			swap_elements(t_stack *stack);
-void			push_element(t_stack *from, t_stack *to);
-void			rotate_elements(t_stack *stack);
-void			rrotate_elements(t_stack *stack);
+void				swap_elements(t_stack *stack);
+void				push_element(t_stack *from, t_stack *to);
+void				rotate_elements(t_stack *stack);
+void				rrotate_elements(t_stack *stack);
 
 t_operation			g_operations[12] = {
 	{"sa", sa},
