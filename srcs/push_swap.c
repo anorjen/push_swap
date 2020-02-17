@@ -6,16 +6,11 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:11:35 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/14 17:44:10 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/17 12:28:57 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	sort(t_list *lst_operations, t_stack *stack_a, t_stack *stack_b)
-{
-	
-}
 
 void	print(t_list *lst_operations)
 {
@@ -41,7 +36,7 @@ int	main(int ac, char **av)
 		write(2, "Error\n", 6);
 	else
 	{
-		sort(lst_operations, stack_a, stack_b);
+		sorting(&lst_operations, stack_a, stack_b);
 		print(lst_operations);
 	}
 	finish(lst_operations, stack_a, stack_b);

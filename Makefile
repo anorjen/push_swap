@@ -7,14 +7,14 @@ INCLUDES  = -I./includes/
 INCLUDES += -I./lib/libft/
 
 SRC_PATH = ./srcs/
-SRC_FILES = ps_operation.c ps_operation_a.c ps_operation_b.c \
+SRC_FILES = operation.c operation_a.c operation_b.c \
 			stack.c stack_operation.c arguments.c
 
 CH_SRC_FILES = SRC_FILES
-CH_SRC_FILES += checker.c checker_run.c
+CH_SRC_FILES += checker.c ch_run.c
 
 PS_SRC_FILES = SRC_FILES
-PS_SRC_FILES += push_swap.c
+PS_SRC_FILES += push_swap.c ps_sorting.c ps_utils.c
 
 CH_SRC = 	$(addprefix $(SRC_PATH), $(CH_SRC_FILES))
 PS_SRC = 	$(addprefix $(SRC_PATH), $(PS_SRC_FILES))

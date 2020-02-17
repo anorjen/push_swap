@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:19:30 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/14 17:23:36 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/17 12:22:39 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	check_number(char *str, int *number)
 		return (1);
 	return (0);
 }
+
+//todo добавить проверку на уникальность
 
 int	fill_stack(t_stack **stack, int ac, char **av)
 {

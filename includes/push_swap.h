@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/14 17:45:58 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/17 14:31:30 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 typedef struct		s_element
 {
 	int				value;
+	int				index;
+	int				is_a;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }					t_element;
@@ -26,6 +28,7 @@ typedef struct		s_stack
 {
 	t_element		*elements;
 	int				size;
+	// int				marked;
 }					t_stack;
 
 typedef void		(*t_spe_key)(t_stack *a, t_stack *b);
@@ -78,6 +81,12 @@ void				swap_elements(t_stack *stack);
 void				push_element(t_stack *from, t_stack *to);
 void				rotate_elements(t_stack *stack);
 void				rrotate_elements(t_stack *stack);
+
+/*
+** sorting.c
+*/
+
+void				sorting(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b);
 
 t_operation			g_operations[12] = {
 	{"sa", sa},
