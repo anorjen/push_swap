@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:42:56 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/14 15:44:33 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:16:39 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_stack	*new_stack()
+t_stack	*new_stack()
 {
 	t_stack	*stack;
 
@@ -37,6 +37,7 @@ t_element		*new_element(int value)
 t_stack			*add_element(t_stack *stack, t_element *element)
 {
 	t_element	*last;
+	t_element	*first;
 
 	if (!stack)
 	{
@@ -52,10 +53,14 @@ t_stack			*add_element(t_stack *stack, t_element *element)
 		}
 		else
 		{
+			first = stack->elements;
 			last = stack->elements->prev;
-			element->next = stack->elements;
+			element->next = first;
 			element->prev = last;
 			last->next = element;
+			first->prev = element;
+			// if (stack->size == 1)
+			// 	last->prev = element;
 			stack->elements = element;
 		}
 		stack->size++;

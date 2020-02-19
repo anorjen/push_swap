@@ -6,13 +6,13 @@
 #    By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 12:12:25 by agottlie          #+#    #+#              #
-#    Updated: 2020/02/07 17:55:33 by anorjen          ###   ########.fr        #
+#    Updated: 2020/02/19 17:29:32 by anorjen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 SRC =	*.c
 

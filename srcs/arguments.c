@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:19:30 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/17 12:22:39 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/18 13:46:38 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	finish(t_list *lst_operations, t_stack *stack_a, t_stack *stack_b)
 int	check_number(char *str, int *number)
 {
 	*number = ft_atoi(str);
-	if (!(*number == 0 && (str[0] == '0' || (str[0] == '-' && str[1] == '0'))))
+	if (*number == 0 && !(str[0] == '0' || (str[0] == '-' && str[1] == '0')))
 		return (1);
 	return (0);
 }
@@ -48,11 +48,12 @@ int	fill_stack(t_stack **stack, int ac, char **av)
 	int	number;
 
 	i = ac;
-	while (--i >= 0)
+	while (--i > 0)
 	{
 		if (check_number(av[i], &number))
 		{
 			free_stack(*stack);
+			*stack = NULL;
 			return (1);
 		}
 		*stack = add_element(*stack, new_element(number));

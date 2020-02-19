@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 16:40:35 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/14 17:07:32 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:06:10 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ void			swap_elements(t_stack *stack)
 void			push_element(t_stack *from, t_stack *to)
 {
 	t_element	*element;
+	t_element	*last;
 
 	if (from && from->elements && from->size)
 	{
+		last = from->elements->prev;
 		element = from->elements;
 		from->elements = element->next;
 		from->elements->prev = element->prev;
+		last->next = from->elements;
 		from->size--;
 		to = add_element(to, element);
 	}

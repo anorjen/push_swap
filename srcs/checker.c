@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:20:55 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/14 17:25:16 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:08:48 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 int	read_operations(t_list **lst_operations)
 {
 	char	*line;
+	int		status;
 
-	while ((get_next_line(0, &line) == 1))
+	line = NULL;
+	while ((status = get_next_line(0, &line) == 1))
 	{
 		ft_lstadd(lst_operations, ft_lstnew(line, ft_strlen(line)));
 	}
+	// write(1, ft_itoa(status), ft_strlen(ft_itoa(status)));
+	// write(1, "\n", 1);
+	if (line)
+		free(line);
 	return (0);
 }
 
@@ -42,6 +48,12 @@ int	main(int ac, char **av)
 		write(2, "Error\n", 6);
 	else
 	{
+		// while (lst_operations)
+		// {
+		// 	write(1, lst_operations->content, lst_operations->content_size);
+		// 	write(1, "\n", 1);
+		// 	lst_operations = lst_operations->next;
+		// }
 		if (check(stack_a, stack_b))
 			write(1, "KO\n", 3);
 		else

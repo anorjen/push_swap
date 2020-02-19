@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_run.c                                      :+:      :+:    :+:   */
+/*   ch_run.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:08:00 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/14 17:04:47 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:39:25 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static t_operation			g_operations[12] = {
+	{"sa", sa},
+	{"sb", sb},
+	{"ss", ss},
+	{"pa", pa},
+	{"pb", pb},
+	{"ra", ra},
+	{"rb", rb},
+	{"rr", rr},
+	{"rra", rra},
+	{"rrb", rrb},
+	{"rrr", rrr},
+	{NULL, NULL}
+};
 
 int	check(t_stack *stack_a, t_stack *stack_b)
 {
@@ -21,11 +36,11 @@ int	check(t_stack *stack_a, t_stack *stack_b)
 	if (stack_b && stack_b->size != 0)
 		return (1);
 	element1 = stack_a->elements;
-	element1 = stack_a->elements->next;
+	element2 = stack_a->elements->next;
 	size = stack_a->size;
-	while (size--)
+	while (--size)
 	{
-		if (element1 > element2)
+		if (element1->value > element2->value)
 			return (1);
 		element1 = element2;
 		element2 = element2->next;
@@ -44,7 +59,7 @@ int	run(t_list *lst_operations, t_stack **stack_a, t_stack **stack_b)
 		i = -1;
 		while (g_operations[++i].name)
 		{
-			if (ft_strcmp(g_operations[i].name, lst_operations->content))
+			if (ft_strcmp(g_operations[i].name, lst_operations->content) == 0)
 			{
 				g_operations[i].operation(*stack_a, *stack_b);
 				err = 0;
