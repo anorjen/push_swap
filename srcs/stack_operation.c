@@ -6,26 +6,37 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 16:40:35 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/20 16:56:05 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:54:12 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void			swap_elements(t_stack *stack)
 {
 	t_element	*first;
 	t_element	*second;
+	t_element	*last;
 
 	if (stack && stack->elements && stack->size > 1)
 	{
-		first = stack->elements;
-		second = stack->elements->next;
-		second->prev = first->prev;
-		first->next = second->next;
-		second->next = first;
-		first->prev = second;
-		stack->elements = second;
+		if (stack->size == 2)
+			rotate_elements(stack);
+		else
+		{
+			first = stack->elements;
+			second = stack->elements->next;
+			last = first->prev;
+			// printf("%d %d %d\n", first->value, second->value, last->value);
+			second->prev = last;
+			first->next = second->next;
+			first->next->prev = first;
+			second->next = first;
+			first->prev = second;
+			last->next = second;
+			stack->elements = second;
+		}
 	}
 }
 

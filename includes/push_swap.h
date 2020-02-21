@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/20 16:15:29 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:53:41 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# define DEBUG 1
+# define DEBUG 0
 # include <stdlib.h>
 # include "libft.h"
 
@@ -21,6 +21,8 @@ typedef struct			s_element
 	int					value;
 	int					index;
 	int					is_a;
+	int					rcounter;
+	int					direction;
 	struct s_element	*prev;
 	struct s_element	*next;
 }						t_element;
