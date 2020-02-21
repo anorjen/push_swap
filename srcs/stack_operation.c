@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 16:40:35 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/19 17:06:10 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:56:05 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 void			swap_elements(t_stack *stack)
 {
 	t_element	*first;
+	t_element	*second;
 
 	if (stack && stack->elements && stack->size > 1)
 	{
 		first = stack->elements;
-		stack->elements = first->next;
-		stack->elements->prev = first->prev;
-		first->next = stack->elements->next;
-		stack->elements->next = first;
+		second = stack->elements->next;
+		second->prev = first->prev;
+		first->next = second->next;
+		second->next = first;
+		first->prev = second;
+		stack->elements = second;
 	}
 }
 

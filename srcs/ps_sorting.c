@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:17:26 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/19 18:59:57 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:21:42 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,43 @@ void	markup(t_stack *stack_a)
 		cur = cur->next;
 	}
 	stack_a->marked = head_marked;
+	// write(1, ft_itoa(head->index), ft_strlen(ft_itoa(head->index)));
+	// write(1, "\n", 1);
 	mark(head, stack_a->size);
+}
+
+int		number_of_marked(t_stack *stack)
+{
+	int			size;
+	t_element	*elements;
+	int			nbr;
+
+	size = stack->size;
+	elements = stack->elements;
+	nbr = 0;
+	while (size--)
+	{
+		if (elements->is_a == 0)
+			++nbr;
+		elements = elements->next;
+	}
+	return (nbr);
+}
+
+int		is_need_sa(t_stack *stack_a, t_stack *stack_b)
+{
+	int	old_marked;
+	int	new_marked;
+
+	old_marked = number_of_marked(stack_a);
+	sa(stack_a, stack_b);
+	markup(stack_a);
+	new_marked = number_of_marked(stack_a);
+	sa(stack_a, stack_b);
+	markup(stack_a);
+	if (new_marked < old_marked)
+		return (1);
+	return (0);
 }
 
 void	from_a_to_b(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
@@ -116,20 +152,31 @@ void	from_a_to_b(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 	i = -1;
 	while (++i < size)
 	{
-		if (stack_a->elements->is_a == 0)
+		if (is_need_sa(stack_a, stack_b))
+		{
+			sa(stack_a, stack_b);
+			ft_lstadd(lst_operations, ft_lstnew("sa", 2));
+			// write(1, "sa\n", 3);
+			markup(stack_a);
+			size = stack_a->size;
+			i = -1;
+		}
+		else if (stack_a->elements->is_a == 0)
 		{
 			pb(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("pb", 2));
+			// write(1, "pb\n", 3);
 		}
 		else
 		{
 			ra(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("ra", 2));
+			// write(1, "ra\n", 3);
 		}
 	}
 }
 
-int		rotate_counter(int index, t_stack *stack, int *direction)
+int		rotate_counter_a(int index, t_stack *stack, int *direction)
 {
 	t_element	*elements;
 	int			counter;
@@ -140,7 +187,7 @@ int		rotate_counter(int index, t_stack *stack, int *direction)
 	i = -1;
 	while (++i < stack->size)
 	{
-		if (elements->index != index)
+		if (elements->index != index + 1 && elements->prev->index != index - 1)
 			++counter;
 		else
 		{
@@ -152,6 +199,54 @@ int		rotate_counter(int index, t_stack *stack, int *direction)
 	return (-1);
 
 }
+
+int		rotate_counter_b(int index, int prev_index, t_stack *stack, int *direction)
+{
+	t_element	*elements;
+	int			counter;
+	int			i;
+
+	counter = 0;
+	elements = stack->elements;
+	i = -1;
+	while (++i < stack->size)
+	{
+		if (elements->index != index - 1 && elements->index != prev_index + 1)
+			++counter;
+		else
+		{
+			*direction = (counter > stack->size / 2 ? 1 : 0);
+			return (*direction == 1 ? stack->size - counter : counter);
+		}
+		elements = elements->next;
+	}
+	return (-1);
+
+}
+
+// int		rotate_counter(int index, t_stack *stack, int *direction)
+// {
+// 	t_element	*elements;
+// 	int			counter;
+// 	int			i;
+
+// 	counter = 0;
+// 	elements = stack->elements;
+// 	i = -1;
+// 	while (++i < stack->size)
+// 	{
+// 		if (elements->index != index)
+// 			++counter;
+// 		else
+// 		{
+// 			*direction = (counter > stack->size / 2 ? 1 : 0);
+// 			return (*direction == 1 ? stack->size - counter : counter);
+// 		}
+// 		elements = elements->next;
+// 	}
+// 	return (-1);
+
+// }
 
 // void	rotate_stack(t_list *lst_operations, t_stack *stack, int direction, int counts)
 // {
@@ -183,12 +278,13 @@ void	from_b_to_a(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 
 	while (stack_b && stack_b->size > 0)
 	{
-		rcount_a = rotate_counter(stack_b->elements->index + 1, stack_a, &direction_a);
-		rcount_b = rotate_counter(stack_a->elements->index - 1, stack_b, &direction_b);
+		rcount_a = rotate_counter_a(stack_b->elements->index, stack_a, &direction_a);
+		rcount_b = rotate_counter_b(stack_a->elements->index, stack_a->elements->prev->index, stack_b, &direction_b);
 		if (rcount_a == -1 && rcount_b == -1)
 		{
 			ra(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("ra", 2));
+			// write(1, "ra\n", 3);
 			continue ;
 		}
 		if (rcount_b == -1 || (rcount_a != -1 && rcount_a < rcount_b))
@@ -199,16 +295,19 @@ void	from_b_to_a(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 				{
 					ra(stack_a, stack_b);
 					ft_lstadd(lst_operations, ft_lstnew("ra", 2));
+					// write(1, "ra\n", 3);
 				}
 				else
 				{
 					rra(stack_a, stack_b);
 					ft_lstadd(lst_operations, ft_lstnew("rra", 3));
+					// write(1, "rra\n", 4);
 				}
 				--rcount_a;
 			}
 			pa(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("pa", 2));
+			// write(1, "pa\n", 3);
 		}
 		else if (rcount_a == -1 || (rcount_b != -1 && rcount_b < rcount_a))
 		{
@@ -218,16 +317,25 @@ void	from_b_to_a(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 				{
 					rb(stack_a, stack_b);
 					ft_lstadd(lst_operations, ft_lstnew("rb", 2));
+					// write(1, "rb\n", 3);
 				}
 				else
 				{
 					rrb(stack_a, stack_b);
 					ft_lstadd(lst_operations, ft_lstnew("rrb", 3));
+					// write(1, "rrb\n", 4);
 				}
 				--rcount_b;
 			}
 			pa(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("pa", 2));
+			// write(1, "pa\n", 3);
+		}
+		if (rcount_a == 0 && rcount_b == 0)
+		{
+			pa(stack_a, stack_b);
+			ft_lstadd(lst_operations, ft_lstnew("pa", 2));
+			// write(1, "pa\n", 3);
 		}
 	}
 }
@@ -251,6 +359,7 @@ void	to_align(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 		{
 			ra(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("ra", 2));
+			// write(1, "ra\n", 3);
 			--i;
 		}
 	}
@@ -261,6 +370,7 @@ void	to_align(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 		{
 			rra(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("rra", 3));
+			// write(1, "ra\n", 3);
 			--i;
 		}
 	}

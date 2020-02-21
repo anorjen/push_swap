@@ -6,12 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/19 11:55:56 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:15:29 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define DEBUG 1
 # include <stdlib.h>
 # include "libft.h"
 
