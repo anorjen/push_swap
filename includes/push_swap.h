@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/06/30 18:26:12 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/06/30 20:39:33 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct			s_element
 	int					value;
 	int					index;
 	int					is_a;
+	int					is_sorted;
 	int					rcounter;
 	int					direction;
 	struct s_element	*prev;
@@ -106,5 +107,12 @@ void				sorting(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b);
 
 int					*stack_to_array(t_stack *stack);
 void				array_sort(int *array, int size);
+
+/*
+** ps_markup.c
+*/
+
+void				indexing(t_stack *stack_a);
+void				markup(t_stack *stack_a);
 
 #endif

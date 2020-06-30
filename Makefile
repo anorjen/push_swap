@@ -22,6 +22,7 @@ CH_SRC_FILES += checker.c \
 PS_SRC_FILES = $(SRC_FILES)
 PS_SRC_FILES += push_swap.c \
 				ps_utils.c \
+				ps_markup.c \
 				ps_sorting1.c
 
 CH_SRC = 	$(addprefix $(SRC_PATH), $(CH_SRC_FILES))
