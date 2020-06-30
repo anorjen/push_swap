@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_sorting.c                                       :+:      :+:    :+:   */
+/*   ps_sorting1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:17:26 by anorjen           #+#    #+#             */
-/*   Updated: 2020/06/30 18:28:02 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/06/30 19:56:20 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,11 +413,11 @@ void	sorting(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 {
 	indexing(stack_a);
 	markup(stack_a);
-	if (stack_a->marked > 0)
-	{
+	// if (stack_a->marked > 0)
+	// {
 		from_a_to_b(lst_operations, stack_a, stack_b);
 		to_align(lst_operations, stack_a, stack_b);
 		from_b_to_a(lst_operations, stack_a, stack_b);
-	}
+	// }
 	to_align(lst_operations, stack_a, stack_b);
 }
