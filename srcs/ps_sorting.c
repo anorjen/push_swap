@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:17:26 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/21 17:02:36 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/06/30 13:31:12 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	markup(t_stack *stack_a)
 
 	cur = stack_a->elements;
 	head = NULL;
+	head_marked = stack_a->size;
 	i = -1;
 	while (++i < stack_a->size)
 	{
@@ -150,18 +151,17 @@ void	from_a_to_b(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 
 	size = stack_a->size;
 	i = -1;
-	while (++i < size && stack_a->marked)
+	while (stack_a->marked)
 	{
 		if (is_need_sa(stack_a, stack_b))
 		{
 			sa(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("sa", 2));
 			markup(stack_a);
-			size = stack_a->size;
-			i = -1;
+			// size = stack_a->size;
+			// i = -1;
 		}
-		else
-		 if (stack_a->elements->is_a == 0)
+		else if (stack_a->elements->is_a == 0)
 		{
 			pb(stack_a, stack_b);
 			ft_lstadd(lst_operations, ft_lstnew("pb", 2));
