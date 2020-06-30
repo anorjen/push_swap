@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:17:26 by anorjen           #+#    #+#             */
-/*   Updated: 2020/06/30 13:31:12 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/06/30 18:28:02 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,28 +130,57 @@ int		number_of_marked(t_stack *stack)
 
 int		is_need_sa(t_stack *stack_a, t_stack *stack_b)
 {
-	int	old_marked;
-	int	new_marked;
+	int		old_marked;
+	int		new_marked;
+	t_stack	*copy;
 
-	old_marked = number_of_marked(stack_a);
-	sa(stack_a, stack_b);
-	markup(stack_a);
-	new_marked = number_of_marked(stack_a);
-	sa(stack_a, stack_b);
-	markup(stack_a);
+	copy = copy_stack(stack_a);
+	old_marked = number_of_marked(copy);
+	sa(copy, stack_b);
+	markup(copy);
+	new_marked = number_of_marked(copy);
+	// sa(copy, stack_b);
+	// markup(stack_a);
+	free_stack(copy);
 	if (new_marked < old_marked)
 		return (1);
 	return (0);
+}
+
+int		rotate_ra_or_rra(t_stack *stack, int *direction)
+{
+	t_element	*elements;
+	int			ra_counter;
+	int			rra_counter;
+
+	ra_counter = 0;
+	rra_counter = 0;
+	elements = stack->elements;
+	while (elements->is_a == 1)
+	{
+		++ra_counter;
+		elements = elements->next;
+	}
+	elements = stack->elements;
+	while (elements->is_a == 1)
+	{
+		++rra_counter;
+		elements = elements->prev;
+	}
+	*direction = (rra_counter < ra_counter ? 1 : 0);
+	return (rra_counter < ra_counter ? rra_counter : ra_counter);
 }
 
 void	from_a_to_b(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 {
 	int	size;
 	int	i;
+	int	direction;
+	int	count;
 
 	size = stack_a->size;
 	i = -1;
-	while (stack_a->marked)
+	while (number_of_marked(stack_a))
 	{
 		if (is_need_sa(stack_a, stack_b))
 		{
@@ -169,9 +198,22 @@ void	from_a_to_b(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 		}
 		else
 		{
-			ra(stack_a, stack_b);
-			ft_lstadd(lst_operations, ft_lstnew("ra", 2));
-			// write(1, "ra\n", 3);
+			count = rotate_ra_or_rra(stack_a, &direction);
+			while (count--)
+			{
+				if (direction)
+				{
+					rra(stack_a, stack_b);
+					ft_lstadd(lst_operations, ft_lstnew("rra", 3));
+					// write(1, "rra\n", 4);
+				}
+				else
+				{
+					ra(stack_a, stack_b);
+					ft_lstadd(lst_operations, ft_lstnew("ra", 2));
+					// write(1, "ra\n", 3);
+				}
+			}
 		}
 	}
 }

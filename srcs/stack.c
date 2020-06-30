@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:42:56 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/19 17:16:39 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/06/30 19:47:36 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ t_stack	*new_stack()
 {
 	t_stack	*stack;
 
-	stack = (t_stack*)malloc(sizeof(t_stack));
+	if ((stack = (t_stack*)malloc(sizeof(t_stack))))
+	{
+		stack->elements = NULL;
+		stack->size = 0;
+		stack->marked = 0;
+	}
 	return (stack);
 }
 
@@ -88,4 +93,28 @@ void			free_stack(t_stack *stack)
 		}
 		free(stack);
 	}
+}
+
+t_stack			*copy_stack(t_stack *stack)
+{
+	t_stack		*copy;
+	t_element	*copy_element;
+	t_element	*element;
+	int			i;
+
+	copy = new_stack();
+	element = stack->elements->prev;
+	i = -1;
+	while (++i < stack->size)
+	{
+		copy_element = new_element(element->value);
+		copy_element->index = element->index;
+		copy_element->is_a = element->is_a;
+		// copy_element->rcounter = element->rcounter;
+		// copy_element->direction = element->direction;
+		add_element(copy, copy_element);
+		element = element->prev;
+	}
+	copy->marked = stack->marked;
+	return (copy);
 }

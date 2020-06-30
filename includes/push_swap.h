@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/21 17:53:41 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/06/30 18:26:12 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_stack				*new_stack();
 t_element			*new_element(int value);
 t_stack				*add_element(t_stack *stack, t_element *element);
 void				free_stack(t_stack *stack);
+t_stack				*copy_stack(t_stack *stack);
 
 /*
 ** stack_operation.c
