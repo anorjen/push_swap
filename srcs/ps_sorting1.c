@@ -6,11 +6,11 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:17:26 by anorjen           #+#    #+#             */
-/*   Updated: 2020/06/30 20:08:53 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/02 19:25:08 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+// #include "push_swap.h"
 
 int		number_of_marked(t_stack *stack)
 {

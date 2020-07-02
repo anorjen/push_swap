@@ -13,7 +13,8 @@ SRC_FILES = operations.c \
 			operations_b.c \
 			stack.c \
 			stack_operation.c \
-			arguments.c
+			arguments.c \
+			stack_index.c
 
 CH_SRC_FILES = $(SRC_FILES)
 CH_SRC_FILES += checker.c \
@@ -23,7 +24,8 @@ PS_SRC_FILES = $(SRC_FILES)
 PS_SRC_FILES += push_swap.c \
 				ps_utils.c \
 				ps_markup.c \
-				ps_sorting1.c
+				ps_sorting2.c \
+				ps_shift.c
 
 CH_SRC = 	$(addprefix $(SRC_PATH), $(CH_SRC_FILES))
 PS_SRC = 	$(addprefix $(SRC_PATH), $(PS_SRC_FILES))

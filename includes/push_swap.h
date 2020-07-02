@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/06/30 20:39:33 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/02 22:56:18 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct		s_operation
 	char			*name;
 	t_spe_key		operation;
 }					t_operation;
+
+// t_list			*lst_operations;
 
 /*
 ** arguments.c
@@ -114,5 +116,25 @@ void				array_sort(int *array, int size);
 
 void				indexing(t_stack *stack_a);
 void				markup(t_stack *stack_a);
+
+/*
+** stack_index.c
+*/
+
+int					is_max_index(t_stack *stack, int index);
+int					is_min_index(t_stack *stack, int index);
+int					get_min_index(t_stack *stack);
+int					get_max_index(t_stack *stack);
+int					to_index(t_stack *stack, int index);
+
+/*
+** ps_shift.c
+*/
+
+void	shift_a(t_list **lst_operations, t_stack *stack, int count);
+void	shift_b(t_list **lst_operations, t_stack *stack, int count);
+void	from_a_to_b(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b, int size, char *sort);
+void	move_b_to_a(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b, int count);
+void	merge(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b, int sorted, int count);
 
 #endif
