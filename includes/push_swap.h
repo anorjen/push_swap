@@ -6,12 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 18:24:52 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 19:11:09 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
 # define DEBUG 0
 # define ABS(x) (x >= 0 ? x : -x)
 # include <stdlib.h>
@@ -173,6 +174,6 @@ int					rotate_counter_b(int index, int prev_index, t_stack *stack);
 ** simple_merge_sort.c
 */
 
-void				simple_merge_sort(t_stack *stack_a, t_stack *stack_b);
+// void				simple_merge_sort(t_stack *stack_a, t_stack *stack_b);
 
 #endif

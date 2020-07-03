@@ -1,81 +1,112 @@
-PS_NAME = push_swap
-CH_NAME = checker
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/08/24 15:42:48 by anorjen           #+#    #+#              #
+#    Updated: 2020/07/03 19:23:53 by anorjen          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME_PS = push_swap
+NAME_CH = checker
+
 CC = clang
+FLAGS = -Wall -Werror -Wextra
+LIBRARIES = -lft -L$(LIBFT_DIRECTORY)
+INCLUDES = -I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS)
 
-LIBFT_PATH = ./lib/libft/
-LIBFT = $(LIBFT_PATH)libft.a
-INCLUDES  = -I./includes/
-INCLUDES += -I./lib/libft/
+LIBFT = $(LIBFT_DIRECTORY)libft.a
+LIBFT_DIRECTORY = ./lib/libft/
+LIBFT_HEADERS = $(LIBFT_DIRECTORY)
 
-SRC_PATH = ./srcs/
-SRC_FILES = operations.c \
-			operations_a.c \
-			operations_b.c \
-			stack.c \
-			stack_operation.c \
-			arguments.c \
-			stack_index.c \
-			logger.c
+HEADERS_LIST = push_swap.h
+HEADERS_DIRECTORY = ./includes/
+HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
-CH_SRC_FILES = $(SRC_FILES)
-CH_SRC_FILES += checker.c \
-				ch_run.c
+SOURCES_DIRECTORY = ./srcs/
+SOURCES_LIST = 	operations.c \
+				operations_a.c \
+				operations_b.c \
+				stack.c \
+				stack_operation.c \
+				arguments.c \
+				stack_index.c \
+				logger.c
 
-PS_SRC_FILES = $(SRC_FILES)
-PS_SRC_FILES += push_swap.c \
-				ps_utils.c \
-				ps_sort.c \
-				ps_index.c \
-				insert_sort.c \
-				is_markup.c \
-				is_rotate.c \
-				merge_sort.c \
-				ms_shift.c \
-				simple_merge_sort.c
+SOURCES_LIST_PS = 	push_swap.c \
+					ps_utils.c \
+					ps_sort.c \
+					ps_index.c \
+					insert_sort.c \
+					is_markup.c \
+					is_rotate.c \
+					merge_sort.c \
+					ms_shift.c
 
-CH_SRC = 	$(addprefix $(SRC_PATH), $(CH_SRC_FILES))
-PS_SRC = 	$(addprefix $(SRC_PATH), $(PS_SRC_FILES))
+SOURCES_LIST_CH =	checker.c \
+					ch_run.c
 
+SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
+SOURCES_PS = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST_PS))
+SOURCES_CH = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST_CH))
 
-FLAG = -Wall -Werror -Wextra -g
-CH_OBJ = $(CH_SRC_FILES:.c=.o)
-PS_OBJ = $(PS_SRC_FILES:.c=.o)
-# OBJ = *.o
+OBJECTS_DIRECTORY = objects/
+OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
+OBJECTS_LIST_PS = $(patsubst %.c, %.o, $(SOURCES_LIST_PS))
+OBJECTS_LIST_CH = $(patsubst %.c, %.o, $(SOURCES_LIST_CH))
+OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
+OBJECTS_PS = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST_PS))
+OBJECTS_CH = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST_CH))
 
-CG = \033[92m
-all: start $(CH_NAME) $(PS_NAME)
+# COLORS
+
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+
+.PHONY: all clean fclean re
+
+all: $(NAME_PS) $(NAME_CH)
+
+$(NAME_PS): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS) $(OBJECTS_PS)
+	@$(CC) $(FLAGS) -o $(NAME_PS)  $(OBJECTS) $(OBJECTS_PS) $(LIBRARIES) $(INCLUDES)
+	@echo "\n$(NAME_PS): $(GREEN)$(NAME_PS) object files were created$(RESET)"
+	@echo "$(NAME_PS): $(GREEN)$(NAME_PS) was created$(RESET)"
+
+$(NAME_CH): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS) $(OBJECTS_CH)
+	@$(CC) $(FLAGS) -o $(NAME_CH) $(OBJECTS) $(OBJECTS_CH) $(LIBRARIES) $(INCLUDES)
+	@echo "\n$(NAME_PS): $(GREEN)$(NAME_CH) object files were created$(RESET)"
+	@echo "$(NAME_PS): $(GREEN)$(NAME_CH) was created$(RESET)"
+
+$(OBJECTS_DIRECTORY):
+	@mkdir -p $(OBJECTS_DIRECTORY)
+	@echo "$(NAME_PS): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)"
+
+$(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
+	@echo "$(GREEN).$(RESET)\c"
 
 $(LIBFT):
-	@make -sC ./lib/libft/
-	@echo "\r--= libft compiled =--"
-
-$(CH_NAME): $(LIBFT)
-	@$(CC)  -c $(FLAG) $(CH_SRC) $(INCLUDES)
-	@$(CC)  -ltermcap -o $(CH_NAME) $(CH_OBJ) -lft -L$(LIBFT_PATH) $(INCLUDES)
-	@echo "\r--= $(CH_NAME) compiled =--"
-
-$(PS_NAME): $(LIBFT)
-	@$(CC)  -c $(FLAG) $(PS_SRC) $(INCLUDES)
-	@$(CC)  -ltermcap -o $(PS_NAME) $(PS_OBJ) -lft -L$(LIBFT_PATH) $(INCLUDES)
-	@echo "\r--= $(PS_NAME) compiled =--"
-
-start:
-	@echo "\r$(CG)compile..."
-	@echo "	------------------------------------------------------------------------------	"
-	@echo "	| 000000  00   00  0000  00           0000  00          00   0000   000000   |	"
-	@echo "	| 00   00 00   00 00     00          00     00    00    00 00    00 00   00  |	"
-	@echo "	| 000000  00   00  0000  000000       0000   00   00   00  00    00 000000   |	"
-	@echo "	| 00      00   00     00 00   00         00  00   00   00  00000000 00       |	"
-	@echo "	| 00      00   00 0   00 00   00     0   00   00 0  0 00   00    00 00       |	"
-	@echo "	| 00       00000   0000  00   00 0000 0000     000  000    00    00 00       |	"
-	@echo "	------------------------------------------------------------------------------	"
+	@echo "$(NAME_PS): $(GREEN)creating $(LIBFT)...$(RESET)"
+	@$(MAKE) -sC $(LIBFT_DIRECTORY)
 
 clean:
-	@make clean -sC lib/libft/
-	@rm -rf $(CH_OBJ) $(PS_OBJ)
+	@$(MAKE) -sC $(LIBFT_DIRECTORY) clean
+	@rm -rf $(OBJECTS_DIRECTORY)
+	@echo "$(NAME_PS): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
+	@echo "$(NAME_PS): $(RED)object files were deleted$(RESET)"
 
 fclean: clean
-	@make fclean -sC lib/libft/
-	@rm -rf $(CH_NAME) $(PS_NAME)
+	@rm -f $(LIBFT)
+	@echo "$(NAME_PS): $(RED)$(LIBFT) was deleted$(RESET)"
+	@rm -f $(NAME_PS)
+	@echo "$(NAME_PS): $(RED)$(NAME_PS) was deleted$(RESET)"
+	@rm -f $(NAME_CH)
+	@echo "$(NAME_PS): $(RED)$(NAME_CH) was deleted$(RESET)"
 
-re: fclean all
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
