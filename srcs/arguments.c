@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:19:30 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/18 13:46:38 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 17:45:27 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ void	free_list(t_list *lst_operations)
 	}
 }
 
-void	finish(t_list *lst_operations, t_stack *stack_a, t_stack *stack_b)
+void	finish(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 {
 	free_stack(stack_a);
 	free_stack(stack_b);
-	free_list(lst_operations);
+	free_list(*lst_operations);
+	free(lst_operations);
+	lst_operations = NULL;
 }
 
 int	check_number(char *str, int *number)
@@ -40,7 +42,37 @@ int	check_number(char *str, int *number)
 	return (0);
 }
 
-//todo добавить проверку на уникальность
+/*
+** проверка на уникальность
+*/
+
+static int	check_unique(t_stack *stack)
+{
+	t_element	*element;
+	t_element	*tmp;
+	int			i;
+	int			j;
+
+	if (stack && stack->elements)
+	{
+		element = stack->elements;
+		i = -1;
+		while (++i < stack->size)
+		{
+			tmp = element->next;
+			j = i;
+			while (++j < stack->size)
+			{
+				if (tmp->value == element->value)
+					return (1);
+				tmp = tmp->next;
+			}
+			element = element->next;
+		}
+		return (0);
+	}
+	return (1);
+}
 
 int	fill_stack(t_stack **stack, int ac, char **av)
 {
@@ -58,5 +90,7 @@ int	fill_stack(t_stack **stack, int ac, char **av)
 		}
 		*stack = add_element(*stack, new_element(number));
 	}
+	if (check_unique(*stack) != 0)
+		return (1);
 	return (0);
 }

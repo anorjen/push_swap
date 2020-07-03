@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_mark.c                                          :+:      :+:    :+:   */
+/*   is_markup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 20:04:36 by anorjen           #+#    #+#             */
-/*   Updated: 2020/06/30 20:07:32 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 13:34:32 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	indexing(t_stack *stack_a)
+int		number_of_marked(t_stack *stack)
 {
-	int			*array;
-	int			i;
-	int			j;
-	t_element	*tmp;
+	int			size;
+	t_element	*elements;
+	int			nbr;
 
-	array = stack_to_array(stack_a);
-	array_sort(array, stack_a->size);
-	i = -1;
-	while (++i < stack_a->size)
+	size = stack->size;
+	elements = stack->elements;
+	nbr = 0;
+	while (size--)
 	{
-		j = 0;
-		tmp = stack_a->elements;
-		while (j < stack_a->size)
-		{
-			if (tmp->value == array[i])
-				tmp->index = i;
-			tmp = tmp->next;
-			++j;
-		}
+		if (elements->is_a == 0)
+			++nbr;
+		elements = elements->next;
 	}
-	free(array);
+	return (nbr);
 }
 
 static void	mark(t_element *head, int size)
@@ -60,7 +53,7 @@ static void	mark(t_element *head, int size)
 	}
 }
 
-static int		count_marked(t_element *head, int size)
+static int	count_marked(t_element *head, int size)
 {
 	int			j;
 	int			marked;
@@ -82,7 +75,7 @@ static int		count_marked(t_element *head, int size)
 	return (marked);
 }
 
-void	markup(t_stack *stack_a)
+void		markup(t_stack *stack_a)
 {
 	t_element	*cur;
 	t_element	*head;
@@ -105,7 +98,5 @@ void	markup(t_stack *stack_a)
 		cur = cur->next;
 	}
 	stack_a->marked = head_marked;
-	// write(1, ft_itoa(head->index), ft_strlen(ft_itoa(head->index)));
-	// write(1, "\n", 1);
 	mark(head, stack_a->size);
 }

@@ -14,7 +14,8 @@ SRC_FILES = operations.c \
 			stack.c \
 			stack_operation.c \
 			arguments.c \
-			stack_index.c
+			stack_index.c \
+			logger.c
 
 CH_SRC_FILES = $(SRC_FILES)
 CH_SRC_FILES += checker.c \
@@ -23,9 +24,14 @@ CH_SRC_FILES += checker.c \
 PS_SRC_FILES = $(SRC_FILES)
 PS_SRC_FILES += push_swap.c \
 				ps_utils.c \
-				ps_markup.c \
-				ps_sorting2.c \
-				ps_shift.c
+				ps_sort.c \
+				ps_index.c \
+				insert_sort.c \
+				is_markup.c \
+				is_rotate.c \
+				merge_sort.c \
+				ms_shift.c \
+				simple_merge_sort.c
 
 CH_SRC = 	$(addprefix $(SRC_PATH), $(CH_SRC_FILES))
 PS_SRC = 	$(addprefix $(SRC_PATH), $(PS_SRC_FILES))
