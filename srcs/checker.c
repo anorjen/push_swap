@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:20:55 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 13:16:08 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:24:58 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int ac, char **av)
 {
 	t_stack		*stack_a;
 	t_stack		*stack_b;
-	// t_list		*lst_operations;
 	int			status;
 
 	stack_a = new_stack();

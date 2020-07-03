@@ -6,9 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 19:58:09 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 17:10:16 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:31:44 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** Deprecated
+*/
 
 #include "push_swap.h"
 

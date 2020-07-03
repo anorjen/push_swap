@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:42:56 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 17:56:36 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:34:34 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,11 @@ t_stack			*add_element(t_stack *stack, t_element *element)
 	t_element	*first;
 
 	if (!stack)
-	{
 		stack = new_stack();
-	}
 	if (stack && element)
 	{
 		if (!stack->elements)
 		{
-			stack->elements = element;
 			element->next = element;
 			element->prev = element;
 		}
@@ -66,8 +63,8 @@ t_stack			*add_element(t_stack *stack, t_element *element)
 			element->prev = last;
 			last->next = element;
 			first->prev = element;
-			stack->elements = element;
 		}
+		stack->elements = element;
 		stack->size++;
 	}
 	return (stack);

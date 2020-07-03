@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 20:30:20 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/02 22:37:37 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:36:15 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int		to_index(t_stack *stack, int index)
 		{
 			break ;
 		}
-
 		element = element->next;
 	}
 	return (steps);

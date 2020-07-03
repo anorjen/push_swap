@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 18:07:43 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:24:52 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ typedef struct			s_element
 	int					index;
 	int					is_a;
 	int					is_sorted;
-	// int					rcounter;
-	// int					direction;
 	struct s_element	*prev;
 	struct s_element	*next;
 }						t_element;
