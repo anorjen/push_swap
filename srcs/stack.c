@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:42:56 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 18:34:34 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/23 17:55:35 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_element		*new_element(int value)
 	{
 		element->value = value;
 		element->is_sorted = 0;
+		element->is_a = 0;
 		element->next = element;
 		element->next = element;
 	}

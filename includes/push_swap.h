@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:12:21 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 19:11:09 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/23 19:03:52 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # define DEBUG 0
-# define ABS(x) (x >= 0 ? x : -x)
+# define ABS(x) ((x) >= 0 ? (x) : -(x))
 # include <stdlib.h>
 # include "libft.h"
 
@@ -162,6 +162,12 @@ void				insert_sort(t_stack *stack_a, t_stack *stack_b);
 */
 
 void				merge_sort(t_stack *stack_a, t_stack *stack_b);
+
+/*
+** merge_sort_utils.c
+*/
+
+void				marker(t_stack *stack, int size);
 
 /*
 ** is_rotate.c
