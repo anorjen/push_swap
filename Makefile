@@ -6,28 +6,30 @@
 #    By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/24 15:42:48 by anorjen           #+#    #+#              #
-#    Updated: 2020/07/03 19:23:53 by anorjen          ###   ########.fr        #
+#    Updated: 2020/11/23 16:43:24 by anorjen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_PS = push_swap
-NAME_CH = checker
+PS_NAME = push_swap
+CH_NAME = checker
 
 CC = clang
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 LIBRARIES = -lft -L$(LIBFT_DIRECTORY)
 INCLUDES = -I$(HEADERS_DIRECTORY) -I$(LIBFT_HEADERS)
 
 LIBFT = $(LIBFT_DIRECTORY)libft.a
-LIBFT_DIRECTORY = ./lib/libft/
-LIBFT_HEADERS = $(LIBFT_DIRECTORY)
+LIBFT_DIRECTORY = ./libft/
+LIBFT_HEADERS = $(LIBFT_DIRECTORY)/includes
 
-HEADERS_LIST = push_swap.h
+HEADERS_LIST = 	push_swap.h
+
 HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./srcs/
-SOURCES_LIST = 	operations.c \
+
+COMMON_SRC_LIST = operations.c \
 				operations_a.c \
 				operations_b.c \
 				stack.c \
@@ -36,30 +38,31 @@ SOURCES_LIST = 	operations.c \
 				stack_index.c \
 				logger.c
 
-SOURCES_LIST_PS = 	push_swap.c \
-					ps_utils.c \
-					ps_sort.c \
-					ps_index.c \
-					insert_sort.c \
-					is_markup.c \
-					is_rotate.c \
-					merge_sort.c \
-					ms_shift.c
+CH_SRC_LIST = $(COMMON_SRC_LIST)
+CH_SRC_LIST += checker.c \
+				ch_run.c
 
-SOURCES_LIST_CH =	checker.c \
-					ch_run.c
+PS_SRC_LIST = $(COMMON_SRC_LIST)
+PS_SRC_LIST += push_swap.c \
+				ps_utils.c \
+				ps_sort.c \
+				ps_index.c \
+				insert_sort.c \
+				is_markup.c \
+				is_rotate.c \
+				merge_sort.c \
+				ms_shift.c \
+				simple_merge_sort.c
 
-SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
-SOURCES_PS = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST_PS))
-SOURCES_CH = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST_CH))
+CH_SRC = 	$(addprefix $(SOURCES_DIRECTORY), $(CH_SRC_LIST))
+PS_SRC = 	$(addprefix $(SOURCES_DIRECTORY), $(PS_SRC_LIST))
 
 OBJECTS_DIRECTORY = objects/
-OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
-OBJECTS_LIST_PS = $(patsubst %.c, %.o, $(SOURCES_LIST_PS))
-OBJECTS_LIST_CH = $(patsubst %.c, %.o, $(SOURCES_LIST_CH))
-OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
-OBJECTS_PS = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST_PS))
-OBJECTS_CH = $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST_CH))
+CH_OBJ_LIST = $(patsubst %.c, %.o, $(CH_SRC_LIST))
+CH_OBJ	= $(addprefix $(OBJECTS_DIRECTORY), $(CH_OBJ_LIST))
+
+PS_OBJ_LIST = $(patsubst %.c, %.o, $(PS_SRC_LIST))
+PS_OBJ	= $(addprefix $(OBJECTS_DIRECTORY), $(PS_OBJ_LIST))
 
 # COLORS
 
@@ -69,43 +72,53 @@ RESET = \033[0m
 
 .PHONY: all clean fclean re
 
-all: $(NAME_PS) $(NAME_CH)
+all: start  $(OBJECTS_DIRECTORY) $(CH_NAME) $(PS_NAME)
 
-$(NAME_PS): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS) $(OBJECTS_PS)
-	@$(CC) $(FLAGS) -o $(NAME_PS)  $(OBJECTS) $(OBJECTS_PS) $(LIBRARIES) $(INCLUDES)
-	@echo "\n$(NAME_PS): $(GREEN)$(NAME_PS) object files were created$(RESET)"
-	@echo "$(NAME_PS): $(GREEN)$(NAME_PS) was created$(RESET)"
+start:
+	@echo "\r$(CG)compile..."
+	@echo "	------------------------------------------------------------------------------	"
+	@echo "	| 000000  00   00  0000  00           0000  00          00   0000   000000   |	"
+	@echo "	| 00   00 00   00 00     00          00     00    00    00 00    00 00   00  |	"
+	@echo "	| 000000  00   00  0000  000000       0000   00   00   00  00    00 000000   |	"
+	@echo "	| 00      00   00     00 00   00         00  00   00   00  00000000 00       |	"
+	@echo "	| 00      00   00 0   00 00   00     0   00   00 0  0 00   00    00 00       |	"
+	@echo "	| 00       00000   0000  00   00 0000 0000     000  000    00    00 00       |	"
+	@echo "	------------------------------------------------------------------------------	"
 
-$(NAME_CH): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJECTS) $(OBJECTS_CH)
-	@$(CC) $(FLAGS) -o $(NAME_CH) $(OBJECTS) $(OBJECTS_CH) $(LIBRARIES) $(INCLUDES)
-	@echo "\n$(NAME_PS): $(GREEN)$(NAME_CH) object files were created$(RESET)"
-	@echo "$(NAME_PS): $(GREEN)$(NAME_CH) was created$(RESET)"
+
+$(CH_NAME): $(LIBFT) $(CH_OBJ) $(HEADERS)
+	@$(CC) $(FLAGS) $(INCLUDES) $(CH_OBJ) $(LIBRARIES) -o $(CH_NAME)
+	@echo "\n$(CH_NAME): $(GREEN)$(CH_NAME) object files were created$(RESET)"
+	@echo "$(CH_NAME): $(GREEN)$(CH_NAME) was created$(RESET)"
+
+$(PS_NAME): $(LIBFT) $(PS_OBJ) $(HEADERS)
+	@$(CC) $(FLAGS) $(INCLUDES) $(PS_OBJ) $(LIBRARIES) -o $(PS_NAME)
+	@echo "\n$(PS_NAME): $(GREEN)$(PS_NAME) object files were created$(RESET)"
+	@echo "$(PS_NAME): $(GREEN)$(PS_NAME) was created$(RESET)"
 
 $(OBJECTS_DIRECTORY):
 	@mkdir -p $(OBJECTS_DIRECTORY)
-	@echo "$(NAME_PS): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)"
+	@echo "$(NAME): $(GREEN)$(OBJECTS_DIRECTORY) was created$(RESET)"
 
-$(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
+$(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
 	@echo "$(GREEN).$(RESET)\c"
 
 $(LIBFT):
-	@echo "$(NAME_PS): $(GREEN)creating $(LIBFT)...$(RESET)"
+	@echo "$(NAME): $(GREEN)creating $(LIBFT)...$(RESET)"
 	@$(MAKE) -sC $(LIBFT_DIRECTORY)
 
 clean:
 	@$(MAKE) -sC $(LIBFT_DIRECTORY) clean
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@echo "$(NAME_PS): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
-	@echo "$(NAME_PS): $(RED)object files were deleted$(RESET)"
+	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
+	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
 
 fclean: clean
 	@rm -f $(LIBFT)
-	@echo "$(NAME_PS): $(RED)$(LIBFT) was deleted$(RESET)"
-	@rm -f $(NAME_PS)
-	@echo "$(NAME_PS): $(RED)$(NAME_PS) was deleted$(RESET)"
-	@rm -f $(NAME_CH)
-	@echo "$(NAME_PS): $(RED)$(NAME_CH) was deleted$(RESET)"
+	@echo "$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
+	@rm -f $(NAME)
+	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
 
 re:
 	@$(MAKE) fclean
