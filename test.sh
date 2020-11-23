@@ -66,7 +66,7 @@ elif [ "$#" -eq 2 ]; then
     echo -e ${WHITE}${LOOPS}${CLN} "loops";
     echo -e ${WHITE}${NUMBERS}${CLN} "random numbers each";
 else
-   	echo -e "usage (default ${WHITE}2${CLN} numbers and ${WHITE}1${CLN} loop): sh pushchecker.sh [NUMBER] [LOOPS]";
+   	echo -e "usage (default ${WHITE}2${CLN} numbers and ${WHITE}1${CLN} loop): sh test.sh [NUMBER] [LOOPS]";
    	echo -e "      script can check: 3, 5, 100, 500 with warnings"
 	NUMBERS=2;
 	LOOPS=1;

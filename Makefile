@@ -6,7 +6,7 @@
 #    By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/24 15:42:48 by anorjen           #+#    #+#              #
-#    Updated: 2020/11/23 16:43:24 by anorjen          ###   ########.fr        #
+#    Updated: 2020/11/23 16:47:45 by anorjen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ RESET = \033[0m
 .PHONY: all clean fclean re
 
 all: start  $(OBJECTS_DIRECTORY) $(CH_NAME) $(PS_NAME)
+	@./test.sh 100 5
 
 start:
 	@echo "\r$(CG)compile..."
