@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 12:58:27 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 12:58:48 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:23:09 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	logger(t_stack *stack, char *type)
 	char	*op;
 
 	op = ft_strjoin(type, stack->name);
-	ft_lstadd(lst_operations, ft_lstnew(op, ft_strlen(op)));
+	ft_lstadd(g_lst_operations, ft_lstnew(op, ft_strlen(op)));
 	free(op);
 }

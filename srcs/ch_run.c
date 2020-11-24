@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:08:00 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/02 21:55:26 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:11:24 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_operation			g_operations[12] = {
 	{NULL, NULL}
 };
 
-int	check(t_stack *stack_a, t_stack *stack_b)
+int		check(t_stack *stack_a, t_stack *stack_b)
 {
 	t_element	*element1;
 	t_element	*element2;
@@ -60,7 +60,8 @@ void	print_stack(char *name, t_stack *stack)
 		elements = stack->elements;
 		while (size--)
 		{
-			write(1, ft_itoa(elements->value), ft_strlen(ft_itoa(elements->value)));
+			write(1, ft_itoa(elements->value),
+							ft_strlen(ft_itoa(elements->value)));
 			write(1, "  ", 2);
 			elements = elements->next;
 		}
@@ -77,13 +78,13 @@ void	viewer(char *op, t_stack *stack_a, t_stack *stack_b)
 	write(1, "\n\n", 2);
 }
 
-int	run(t_list *lst_operations, t_stack **stack_a, t_stack **stack_b)
+int		run(t_list *lst_operations, t_stack **stack_a, t_stack **stack_b)
 {
 	int	i;
 	int	err;
 
 	err = 1;
-	if(DEBUG)
+	if (DEBUG)
 		viewer("start", *stack_a, *stack_b);
 	while (lst_operations)
 	{
@@ -94,13 +95,13 @@ int	run(t_list *lst_operations, t_stack **stack_a, t_stack **stack_b)
 			{
 				g_operations[i].operation(*stack_a, *stack_b);
 				err = 0;
-				if(DEBUG)
+				if (DEBUG)
 					viewer(g_operations[i].name, *stack_a, *stack_b);
 				break ;
 			}
 		}
 		if (err)
-			return(1);
+			return (1);
 		lst_operations = lst_operations->next;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/24 15:42:48 by anorjen           #+#    #+#              #
-#    Updated: 2020/11/23 18:10:37 by anorjen          ###   ########.fr        #
+#    Updated: 2020/11/24 11:19:27 by anorjen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ PS_SRC_LIST += push_swap.c \
 				is_rotate.c \
 				merge_sort.c \
 				ms_shift.c \
-				simple_merge_sort.c \
 				merge_sort_utils.c
 
 CH_SRC = 	$(addprefix $(SOURCES_DIRECTORY), $(CH_SRC_LIST))

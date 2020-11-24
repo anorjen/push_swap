@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:11:35 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 18:23:36 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:23:32 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	print(t_list *lst_operations)
 	}
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int		status;
 	t_stack	*stack_a;
@@ -34,16 +34,16 @@ int	main(int ac, char **av)
 	stack_a->name = ft_strdup("a");
 	stack_b = new_stack();
 	stack_b->name = ft_strdup("b");
-	lst_operations = (t_list**)malloc(sizeof(t_list*));
-	*lst_operations = NULL;
+	g_lst_operations = (t_list**)malloc(sizeof(t_list*));
+	*g_lst_operations = NULL;
 	status = 0;
 	if ((status = fill_stack(&stack_a, ac, av)))
 		write(2, "Error\n", 6);
 	else
 	{
 		sort(stack_a, stack_b);
-		print(*lst_operations);
+		print(*g_lst_operations);
 	}
-	finish(lst_operations, stack_a, stack_b);
+	finish(g_lst_operations, stack_a, stack_b);
 	return (status);
 }

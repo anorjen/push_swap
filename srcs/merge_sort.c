@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 19:58:09 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/23 19:12:54 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:07:40 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,9 @@ static void	first_chunk(t_stack *stack_a, t_stack *stack_b)
 	count = stack_a->size / get_chunk(stack_a->size);
 	marker(stack_a, count);
 	from_a_to_b(stack_a, stack_b, count, "asc");
-	// align(stack_a, "asc");
 	shift(stack_a, -(count - stack_b->size));
 	align(stack_b, "asc");
-	// move_b_to_a(stack_a, stack_b, count);
 	merge(stack_a, stack_b, count - stack_b->size);
-	// shift(stack_a, count);
 }
 
 static int	count_sorted(t_stack *stack)

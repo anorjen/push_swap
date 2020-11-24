@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:31:39 by anorjen           #+#    #+#             */
-/*   Updated: 2020/02/17 12:52:59 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:15:58 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*stack_to_array(t_stack *stack)
+int		*stack_to_array(t_stack *stack)
 {
 	t_element	*elements;
 	int			size;

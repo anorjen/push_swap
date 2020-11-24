@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 13:22:39 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/24 10:17:23 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:09:49 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	int find_place_asc(t_stack *stack, int index)
+static int	find_place_asc(t_stack *stack, int index)
 {
 	int			i;
 	int			steps;
@@ -36,7 +36,7 @@ static	int find_place_asc(t_stack *stack, int index)
 	return (steps <= stack->size / 2 ? steps : -(stack->size - steps));
 }
 
-static int		find_place_desc(t_stack *stack, int index)
+static int	find_place_desc(t_stack *stack, int index)
 {
 	int			i;
 	int			steps;
@@ -60,7 +60,7 @@ static int		find_place_desc(t_stack *stack, int index)
 	return (steps <= stack->size / 2 ? steps : -(stack->size - steps));
 }
 
-int		find_place(t_stack *stack, int index, char *sort)
+int			find_place(t_stack *stack, int index, char *sort)
 {
 	if (ft_strcmp(sort, "desc") == 0)
 		return (find_place_desc(stack, index));
@@ -69,7 +69,7 @@ int		find_place(t_stack *stack, int index, char *sort)
 	return (0);
 }
 
-void	align(t_stack *stack, char *sort)
+void		align(t_stack *stack, char *sort)
 {
 	int	steps;
 
@@ -85,9 +85,8 @@ void	align(t_stack *stack, char *sort)
 	shift(stack, steps);
 }
 
-void	sort(t_stack *stack_a, t_stack *stack_b)
+void		sort(t_stack *stack_a, t_stack *stack_b)
 {
-
 	if (stack_a->size < 50)
 		insert_sort(stack_a, stack_b);
 	else

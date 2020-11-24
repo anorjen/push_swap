@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:20:55 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/24 10:33:40 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:22:52 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	read_operations(t_list **lst_operations)
 	return (0);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_stack		*stack_a;
 	t_stack		*stack_b;
@@ -35,14 +35,14 @@ int	main(int ac, char **av)
 
 	stack_a = new_stack();
 	stack_b = new_stack();
-	lst_operations = (t_list**)malloc(sizeof(t_list*));
-	*lst_operations = NULL;
+	g_lst_operations = (t_list**)malloc(sizeof(t_list*));
+	*g_lst_operations = NULL;
 	status = 0;
 	if (ac == 1)
 		return (0);
 	if ((status = fill_stack(&stack_a, ac, av))
-		|| (status = read_operations(lst_operations))
-		|| (status = run(*lst_operations, &stack_a, &stack_b)))
+		|| (status = read_operations(g_lst_operations))
+		|| (status = run(*g_lst_operations, &stack_a, &stack_b)))
 		write(2, "Error\n", 6);
 	else
 	{
@@ -51,6 +51,6 @@ int	main(int ac, char **av)
 		else
 			write(1, "OK\n", 3);
 	}
-	finish(lst_operations, stack_a, stack_b);
+	finish(g_lst_operations, stack_a, stack_b);
 	return (status);
 }

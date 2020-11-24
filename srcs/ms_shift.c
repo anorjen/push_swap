@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 19:06:54 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/23 18:58:24 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:08:24 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	from_a_to_b(t_stack *stack_a, t_stack *stack_b, int size, char *sort)
 		else
 		{
 			shift(stack_a, 1);
-			// logger(stack_a, "r");
 		}
 	}
 }
@@ -79,8 +78,8 @@ void	merge(t_stack *stack_a, t_stack *stack_b, int sorted)
 	i = 0;
 	while (stack_b->size > 0 || i < sorted)
 	{
-		if (stack_b->size > 0 && (stack_a->elements->index > stack_b->elements->index
-			|| i == sorted))
+		if (stack_b->size > 0
+		&& (stack_a->elements->index > stack_b->elements->index || i == sorted))
 		{
 			stack_b->elements->is_sorted = 1;
 			pa(stack_a, stack_b);

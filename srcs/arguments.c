@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:19:30 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 17:45:27 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:14:55 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_list(t_list *lst_operations)
+void		free_list(t_list *lst_operations)
 {
 	t_list	*tmp;
 
@@ -25,7 +25,7 @@ void	free_list(t_list *lst_operations)
 	}
 }
 
-void	finish(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
+void		finish(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 {
 	free_stack(stack_a);
 	free_stack(stack_b);
@@ -34,7 +34,7 @@ void	finish(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 	lst_operations = NULL;
 }
 
-int	check_number(char *str, int *number)
+int			check_number(char *str, int *number)
 {
 	*number = ft_atoi(str);
 	if (*number == 0 && !(str[0] == '0' || (str[0] == '-' && str[1] == '0')))
@@ -74,7 +74,7 @@ static int	check_unique(t_stack *stack)
 	return (1);
 }
 
-int	fill_stack(t_stack **stack, int ac, char **av)
+int			fill_stack(t_stack **stack, int ac, char **av)
 {
 	int	i;
 	int	number;

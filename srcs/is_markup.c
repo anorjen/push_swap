@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 20:04:36 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 13:34:32 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:15:08 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		number_of_marked(t_stack *stack)
+int			number_of_marked(t_stack *stack)
 {
 	int			size;
 	t_element	*elements;
