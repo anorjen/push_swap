@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 13:22:39 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/23 18:14:08 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 10:17:23 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	align(t_stack *stack, char *sort)
 void	sort(t_stack *stack_a, t_stack *stack_b)
 {
 
-	// if (stack_a->size < 50)
-	// 	insert_sort(stack_a, stack_b);
-	// else
+	if (stack_a->size < 50)
+		insert_sort(stack_a, stack_b);
+	else
 		merge_sort(stack_a, stack_b);
 }

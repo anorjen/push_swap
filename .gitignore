@@ -6,3 +6,5 @@ checker
 errorstempfile.txt
 Makefile1
 push_swap
+libft
+ps_out

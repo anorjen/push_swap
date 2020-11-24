@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:20:55 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 18:24:58 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 10:33:40 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	read_operations(t_list **lst_operations)
 	int		status;
 
 	line = NULL;
-
 	if ((status = get_next_line(0, &line) != 1))
 		return (0);
 	read_operations(lst_operations);
