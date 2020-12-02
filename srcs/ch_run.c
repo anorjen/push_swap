@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:08:00 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/24 11:11:24 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/12/01 18:42:24 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_operation			g_operations[12] = {
+t_operation			g_operations[] = {
 	{"sa", sa},
 	{"sb", sb},
 	{"ss", ss},

@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 17:19:30 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/24 11:14:55 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/12/01 17:32:39 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,25 @@ void		finish(t_list **lst_operations, t_stack *stack_a, t_stack *stack_b)
 
 int			check_number(char *str, int *number)
 {
+	int		len;
+	char	*snumber;
+
+	len = ft_strlen(str);
+	if (len > 11)
+		return (1);
 	*number = ft_atoi(str);
 	if (*number == 0 && !(str[0] == '0' || (str[0] == '-' && str[1] == '0')))
 		return (1);
+	if (*number % 10 != (str[len - 1] - 48))
+		return (1);
+	snumber = ft_itoa(*number);
+	if (!snumber || ft_strcmp(snumber, str) != 0)
+	{
+		if (snumber)
+			free(snumber);
+		return (1);
+	}
+	free(snumber);
 	return (0);
 }
 
