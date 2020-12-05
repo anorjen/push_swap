@@ -6,13 +6,13 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:42:56 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 18:34:34 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:14:27 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*new_stack()
+t_stack		*new_stack(void)
 {
 	t_stack	*stack;
 
@@ -26,7 +26,7 @@ t_stack	*new_stack()
 	return (stack);
 }
 
-t_element		*new_element(int value)
+t_element	*new_element(int value)
 {
 	t_element	*element;
 
@@ -35,13 +35,14 @@ t_element		*new_element(int value)
 	{
 		element->value = value;
 		element->is_sorted = 0;
+		element->is_a = 0;
 		element->next = element;
 		element->next = element;
 	}
 	return (element);
 }
 
-t_stack			*add_element(t_stack *stack, t_element *element)
+t_stack		*add_element(t_stack *stack, t_element *element)
 {
 	t_element	*last;
 	t_element	*first;
@@ -70,7 +71,7 @@ t_stack			*add_element(t_stack *stack, t_element *element)
 	return (stack);
 }
 
-void			free_stack(t_stack *stack)
+void		free_stack(t_stack *stack)
 {
 	t_element	*element;
 	int			size;
@@ -94,7 +95,7 @@ void			free_stack(t_stack *stack)
 	}
 }
 
-t_stack			*copy_stack(t_stack *stack)
+t_stack		*copy_stack(t_stack *stack)
 {
 	t_stack		*copy;
 	t_element	*copy_element;

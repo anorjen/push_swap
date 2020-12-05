@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 19:58:09 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 16:32:03 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:07:40 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ static void	first_chunk(t_stack *stack_a, t_stack *stack_b)
 	int	count;
 
 	count = stack_a->size / get_chunk(stack_a->size);
-	from_a_to_b(stack_a, stack_b, count, "desc");
-	align(stack_b, "desc");
-	move_b_to_a(stack_a, stack_b, count);
-	shift(stack_a, count);
+	marker(stack_a, count);
+	from_a_to_b(stack_a, stack_b, count, "asc");
+	shift(stack_a, -(count - stack_b->size));
+	align(stack_b, "asc");
+	merge(stack_a, stack_b, count - stack_b->size);
 }
 
 static int	count_sorted(t_stack *stack)
@@ -58,7 +59,6 @@ static int	count_sorted(t_stack *stack)
 static void	next_chunk(t_stack *stack_a, t_stack *stack_b)
 {
 	int	count;
-	int	i;
 	int	nbr_sorted;
 
 	nbr_sorted = count_sorted(stack_a);
@@ -67,7 +67,6 @@ static void	next_chunk(t_stack *stack_a, t_stack *stack_b)
 	{
 		count = stack_a->size - nbr_sorted;
 	}
-	i = -1;
 	from_a_to_b(stack_a, stack_b, count, "asc");
 	align(stack_b, "asc");
 	shift(stack_a, -nbr_sorted);

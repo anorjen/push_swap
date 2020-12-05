@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 12:17:26 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 16:30:31 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:05:51 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static void	is_from_b_to_a(t_stack *stack_a, t_stack *stack_b)
 
 	while (stack_b && stack_b->size > 0)
 	{
-		count = rotate_counter_b(stack_a->elements->index, stack_a->elements->prev->index, stack_b);
+		count = rotate_counter_b(stack_a->elements->index,
+								stack_a->elements->prev->index, stack_b);
 		shift(stack_b, count);
 		pa(stack_a, stack_b);
 		logger(stack_a, "p");

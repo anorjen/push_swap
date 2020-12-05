@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_markup.c                                        :+:      :+:    :+:   */
+/*   merge_sort_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/30 20:04:36 by anorjen           #+#    #+#             */
-/*   Updated: 2020/11/24 11:15:08 by anorjen          ###   ########.fr       */
+/*   Created: 2020/11/23 17:33:43 by anorjen           #+#    #+#             */
+/*   Updated: 2020/11/23 18:44:07 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int			number_of_marked(t_stack *stack)
-{
-	int			size;
-	t_element	*elements;
-	int			nbr;
-
-	size = stack->size;
-	elements = stack->elements;
-	nbr = 0;
-	while (size--)
-	{
-		if (elements->is_a == 0)
-			++nbr;
-		elements = elements->next;
-	}
-	return (nbr);
-}
 
 static void	mark(t_element *head, int size)
 {
@@ -42,9 +24,7 @@ static void	mark(t_element *head, int size)
 	cur = head->next;
 	while (++i < size)
 	{
-		if (cur->index != index + 1)
-			cur->is_a = 0;
-		else
+		if (cur->index > index)
 		{
 			cur->is_a = 1;
 			index = cur->index;
@@ -61,42 +41,45 @@ static int	count_marked(t_element *head, int size)
 	t_element	*cur;
 
 	j = 0;
-	marked = 0;
+	marked = 1;
 	cur = head->next;
 	index = head->index;
 	while (++j < size)
 	{
-		if (cur->index != index + 1)
+		if (cur->index > index)
+		{
 			++marked;
-		else
-			++index;
+			index = cur->index;
+		}
 		cur = cur->next;
 	}
 	return (marked);
 }
 
-void		markup(t_stack *stack_a)
+void		marker(t_stack *stack, int size)
 {
 	t_element	*cur;
 	t_element	*head;
-	int			i;
 	int			head_marked;
 	int			marked;
+	int			head_size;
 
-	cur = stack_a->elements;
+	cur = stack->elements;
 	head = NULL;
-	head_marked = stack_a->size;
-	i = -1;
-	while (++i < stack_a->size)
+	head_marked = 0;
+	head_size = 0;
+	size += 1;
+	while (--size)
 	{
-		marked = count_marked(cur, stack_a->size);
-		if (!head || head_marked > marked)
+		marked = count_marked(cur, size);
+		if (!head || head_marked < marked)
 		{
 			head = cur;
+			head_size = size;
 			head_marked = marked;
 		}
 		cur = cur->next;
 	}
-	stack_a->marked = head_marked;
-	mark(head, stack_a->size);
+	stack->marked = head_marked;
+	mark(head, head_size);
 }

@@ -6,7 +6,7 @@
 /*   By: anorjen <anorjen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 19:06:54 by anorjen           #+#    #+#             */
-/*   Updated: 2020/07/03 16:43:41 by anorjen          ###   ########.fr       */
+/*   Updated: 2020/11/24 11:08:24 by anorjen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,20 @@ void	from_a_to_b(t_stack *stack_a, t_stack *stack_b, int size, char *sort)
 	i = -1;
 	while (++i < size)
 	{
-		if (i >= 2)
+		if (stack_a->elements->is_a == 0)
 		{
-			count = find_place(stack_b, stack_a->elements->index, sort);
-			shift(stack_b, count);
+			if (stack_b->size >= 2)
+			{
+				count = find_place(stack_b, stack_a->elements->index, sort);
+				shift(stack_b, count);
+			}
+			pb(stack_a, stack_b);
+			logger(stack_b, "p");
 		}
-		pb(stack_a, stack_b);
-		logger(stack_b, "p");
+		else
+		{
+			shift(stack_a, 1);
+		}
 	}
 }
 
@@ -71,8 +78,8 @@ void	merge(t_stack *stack_a, t_stack *stack_b, int sorted)
 	i = 0;
 	while (stack_b->size > 0 || i < sorted)
 	{
-		if (stack_b->size > 0 && (stack_a->elements->index > stack_b->elements->index
-			|| i == sorted))
+		if (stack_b->size > 0
+		&& (stack_a->elements->index > stack_b->elements->index || i == sorted))
 		{
 			stack_b->elements->is_sorted = 1;
 			pa(stack_a, stack_b);
@@ -82,6 +89,7 @@ void	merge(t_stack *stack_a, t_stack *stack_b, int sorted)
 		}
 		else
 		{
+			stack_a->elements->is_sorted = 1;
 			ra(stack_a, stack_b);
 			logger(stack_a, "r");
 			++i;
